@@ -2,12 +2,16 @@
 <apex:stylesheet value="{!URLFOR($Resource.slds_2_0_3, 'assets/styles/salesforce-lightning-design-system.min.css')}"/>
 <apex:stylesheet value="{!URLFOR($Resource.spa_core_jquery, 'vendor.min.css')}"/>
 
+<!-- load faker separately for use in mocks -->
+<script type="text/javascript" src="{!URLFOR($Resource.spa_core_jquery, 'faker.min.js')}"/>
+
 <!-- setup a single global variable for settings -->
 <!-- use this to load any VF variable -->
 <script type="text/javascript">
 window.configSettings = {
 	user :{
-		name: '{!$User.username}'
+		name: '{!$User.username}',
+		motto: faker.lorem.sentence()
 	},
 	mocks : {
 		greeting :{
@@ -20,6 +24,7 @@ window.configSettings = {
 	}
 }
 </script>
+
 
 <div id="ui"></div>
 
@@ -45,6 +50,7 @@ $(document).ready(function () {
 		{name:'moment',version:moment.version, url:'http://momentjs.com/'},
 		{name:'jsr-mocks',version:'jquery 1.0', url:'http://dshahin.github.io/jsr-mocks/'},
 		{name:'slds',version:'2.0.3', url:'https://www.lightningdesignsystem.com/'},
+		{name:'faker',version:'3.1.0', url:'https://github.com/marak/Faker.js/'}
 	];
 
 	//load the template
@@ -55,6 +61,7 @@ $(document).ready(function () {
 
 	$.jsr({method:'greeting'})
 	.then(function(greeting){
+		toastr.warning(window.configSettings.user.motto);
 		toastr.success(greeting);
 	}).catch(function(error){
 		toastr.error(error.message);

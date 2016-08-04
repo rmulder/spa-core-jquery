@@ -8,7 +8,7 @@ cat jquery-ui.min.css jquery-ui.theme.min.css jquery.multiselect.css toastr.min.
 
 ##backup previous static resource (just in case)
 mv -f Archive.zip Archive.zip.old
-##zip the static resource
-zip -r ./Archive.zip vendor.min.js vendor.min.css images
+##zip the static resource (add faker.js separately)
+zip -r ./Archive.zip vendor.min.js vendor.min.css images faker.min.js
 
 echo "Static resource output to Archive.zip"

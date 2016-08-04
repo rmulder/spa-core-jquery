@@ -4,6 +4,7 @@
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png">
 </a>
 
+## javascript libraries bundled:
 * jQuery 3.1.0
 * jquery-ui 1.12.0
 * handlebars 4.0.5

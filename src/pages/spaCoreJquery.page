@@ -1,7 +1,11 @@
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false" cache="false" expires="0" docType="html-5.0" applyHtmlTag="false">
 <apex:stylesheet value="{!URLFOR($Resource.slds_2_0_3, 'assets/styles/salesforce-lightning-design-system.min.css')}"/>
 <apex:stylesheet value="{!URLFOR($Resource.spa_core_jquery, 'vendor.min.css')}"/>
-
+<style>
+.avatar {
+	height: 100px; border-radius: 50%;
+}
+</style>
 <!-- load faker separately for use in mocks -->
 <script type="text/javascript" src="{!URLFOR($Resource.spa_core_jquery, 'faker.min.js')}"/>
 
@@ -43,25 +47,43 @@ window.configSettings = {
 </div>
 <div class="slds-grid slds-grid--align-space">
 {{#each deps}}
-	<div><a href="{{url}}">{{name}} {{version}}</a></div>
+	<div><a href="{{url}}"><img class="avatar" src="{{image}}"/><br/>{{name}} {{version}}</a></div>
 {{/each}}
 </div>
 </script>
 
 <!-- core minified spa -->
 <script type="text/javascript" src="{!URLFOR($Resource.spa_core_jquery, 'vendor.min.js')}"/>
-
+<script type="text/javascript">
+toastr.options = {
+	"closeButton": false,
+	"debug": false,
+	"newestOnTop": true,
+	"progressBar": false,
+	"positionClass": "toast-top-center",
+	"preventDuplicates": false,
+	"onclick": null,
+	"showDuration": "300",
+	"hideDuration": "1000",
+	"timeOut": "5000",
+	"extendedTimeOut": "1000",
+	"showEasing": "swing",
+	"hideEasing": "linear",
+	"showMethod": "fadeIn",
+	"hideMethod": "fadeOut"
+};
+</script>
 <script type="text/javascript">
 $(document).ready(function () {
 	var dependencies =[
-		{name:'jquery',version:$().jquery, url:'https://jquery.com/'},
-		{name:'jquery-ui',version:$.ui.version, url:'http://jqueryui.com/'},
-		{name:'handlebars',version:Handlebars.VERSION, url:'http://handlebarsjs.com/'},
-		{name:'toastr',version:toastr.version, url:'http://codeseven.github.io/toastr/'},
-		{name:'moment',version:moment.version, url:'http://momentjs.com/'},
-		{name:'jsr-mocks',version:'jquery 1.0', url:'http://dshahin.github.io/jsr-mocks/'},
-		{name:'slds',version:'2.0.3', url:'https://www.lightningdesignsystem.com/'},
-		{name:'faker',version:'3.1.0', url:'https://github.com/marak/Faker.js/'}
+		{name:'jquery',version:$().jquery, url:'https://jquery.com/',image:faker.internet.avatar()},
+		{name:'jquery-ui',version:$.ui.version, url:'http://jqueryui.com/',image:faker.internet.avatar()},
+		{name:'handlebars',version:Handlebars.VERSION, url:'http://handlebarsjs.com/',image:faker.internet.avatar()},
+		{name:'toastr',version:toastr.version, url:'http://codeseven.github.io/toastr/',image:faker.internet.avatar()},
+		{name:'moment',version:moment.version, url:'http://momentjs.com/',image:faker.internet.avatar()},
+		{name:'jsr-mocks',version:'jquery 1.0', url:'http://dshahin.github.io/jsr-mocks/',image:faker.internet.avatar()},
+		{name:'slds',version:'2.0.3', url:'https://www.lightningdesignsystem.com/',image:faker.internet.avatar()},
+		{name:'faker',version:'3.1.0', url:'https://github.com/marak/Faker.js/',image:faker.internet.avatar()}
 	];
 
 	//load the template

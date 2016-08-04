@@ -2,7 +2,8 @@
 <apex:stylesheet value="{!URLFOR($Resource.slds_2_0_3, 'assets/styles/salesforce-lightning-design-system.min.css')}"/>
 <apex:stylesheet value="{!URLFOR($Resource.spa_core_jquery, 'vendor.min.css')}"/>
 
-//setup a single global variable for settings
+<!-- setup a single global variable for settings -->
+<!-- use this to load any VF variable -->
 <script type="text/javascript">
 window.configSettings = {
 	user :{

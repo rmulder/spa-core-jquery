@@ -11,7 +11,8 @@
 window.configSettings = {
 	user :{
 		name: '{!$User.username}',
-		motto: faker.lorem.sentence()
+		motto: faker.lorem.sentence(),
+		company : faker.company.companyName()
 	},
 	mocks : {
 		greeting :{
@@ -25,11 +26,21 @@ window.configSettings = {
 }
 </script>
 
-
-<div id="ui"></div>
-
 <!-- handlebars template -->
 <script id="template-sample" type="text/x-handlebars-template">
+<div class="slds-page-header" role="banner">
+  <div class="slds-media slds-media--center">
+    <div class="slds-media__figure">
+      <svg aria-hidden="true" class="slds-icon slds-icon-standard-opportunity">
+        <use href="{!URLFOR($Resource.slds_2_0_3, '/assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+      </svg>
+    </div>
+    <div class="slds-media__body">
+      <p class="slds-page-header__title slds-truncate slds-align-middle" title="{{company}}">{{company}} - {{widgets}} Widgets</p>
+      <p class="slds-text-body--small page-header__info">{{customer}} • Unlimited Customer • 11/13/15</p>
+    </div>
+  </div>
+</div>
 <div class="slds-grid slds-grid--align-space">
 {{#each deps}}
 	<div><a href="{{url}}">{{name}} {{version}}</a></div>
@@ -56,8 +67,14 @@ $(document).ready(function () {
 	//load the template
 	var source   = $("#template-sample").html(),
 		template = Handlebars.compile(source),
-		html = template({deps: dependencies});
-	$('#ui').append(html);
+		context = {
+			deps: dependencies,
+			company : configSettings.user.company,
+			widgets : faker.random.number(100000),
+			customer : faker.name.firstName() + ' ' + faker.name.lastName()
+		},
+		html = template(context);
+	$('body').append(html);
 
 	$.jsr({method:'greeting'})
 	.then(function(greeting){

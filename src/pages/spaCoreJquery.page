@@ -33,17 +33,17 @@ window.configSettings = {
 <!-- handlebars template -->
 <script id="template-sample" type="text/x-handlebars-template">
 <div class="slds-page-header" role="banner">
-  <div class="slds-media slds-media--center">
-    <div class="slds-media__figure">
-      <svg aria-hidden="true" class="slds-icon slds-icon-standard-opportunity">
-        <use href="{!URLFOR($Resource.slds_2_0_3, '/assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
-      </svg>
-    </div>
-    <div class="slds-media__body">
-      <p class="slds-page-header__title slds-truncate slds-align-middle" title="{{company}}">{{company}} - {{widgets}} Widgets</p>
-      <p class="slds-text-body--small page-header__info">{{customer}} • Unlimited Customer • 11/13/15</p>
-    </div>
-  </div>
+	<div class="slds-media slds-media--center">
+		<div class="slds-media__figure">
+			<svg aria-hidden="true" class="slds-icon slds-icon-standard-opportunity">
+				<use href="{!URLFOR($Resource.slds_2_0_3, '/assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+			</svg>
+		</div>
+		<div class="slds-media__body">
+			<p class="slds-page-header__title slds-truncate slds-align-middle" title="{{company}}">{{company}} - {{widgets}} Widgets</p>
+			<p class="slds-text-body--small page-header__info">{{customer}} • Unlimited Customer • 11/13/15</p>
+		</div>
+	</div>
 </div>
 <div class="slds-grid slds-grid--align-space">
 {{#each deps}}
@@ -75,6 +75,7 @@ toastr.options = {
 </script>
 <script type="text/javascript">
 $(document).ready(function () {
+
 	var dependencies =[
 		{name:'jquery',version:$().jquery, url:'https://jquery.com/',image:faker.internet.avatar()},
 		{name:'jquery-ui',version:$.ui.version, url:'http://jqueryui.com/',image:faker.internet.avatar()},
@@ -96,8 +97,11 @@ $(document).ready(function () {
 			customer : faker.name.firstName() + ' ' + faker.name.lastName()
 		},
 		html = template(context);
+
+	//add rendered template to the body of the page
 	$('body').append(html);
 
+	//invoke javascript remoting
 	$.jsr({method:'greeting'})
 	.then(function(greeting){
 		toastr.warning(window.configSettings.user.motto);
